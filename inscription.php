@@ -48,10 +48,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="form-floating py-1">
             <input name="email" type="email" class="form-control" id="email" placeholder="Email">
             <label for="email">Email</label>
+            <?php if (isset($errors["email"])) { ?>
+                <div class="alert alert-danger my-2 py-1" role="alert">
+                    <?= $errors["email"] ?>
+                </div>
+            <?php } ?>
         </div>
         <div class="form-floating py-2">
             <input name="password" type="password" class="form-control" id="password" placeholder="Password">
             <label for="password">Mot de passe</label>
+            <div class="alert alert-danger my-2 py-1" role="alert">
+                    <?= $errors["password"] ?>
+                </div>
         </div>
         <button class="btn btn-primary w-100 py-2 my-1" type="submit" name="add_user">Valider</button>
   </form>

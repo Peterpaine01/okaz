@@ -1,5 +1,10 @@
 <?php
 require_once 'templates/header.php';
+
+session_start();
+
+
+
 ?>
 
 
