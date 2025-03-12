@@ -1,9 +1,10 @@
 <?php
 require_once 'templates/header.php';
+require_once 'libs/pdo.php';
 require_once 'libs/listing.php';
 
 
-$listings = getListings();
+$listings = getListings($pdo);
   
 ?>
 <h1 class="pb-2 border-bottom">Les annonces</h1>

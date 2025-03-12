@@ -1,16 +1,23 @@
 <?php
 
-function getListings(): array
+require_once 'libs/pdo.php';
+
+function getListings(PDO $pdo): array
 {
-    return [
-        ["title" => "Test 1", "price" => 30, "image" => "meuble-occasion-prix-critere.jpg", "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc leo tortor, rhoncus malesuada volutpat at, ullamcorper vitae dui. Sed nec lacus mauris. Phasellus eget eleifend purus. Duis eros enim, pulvinar ut justo et, sagittis dignissim enim. Donec rhoncus, arcu at tempus accumsan, nisi risus condimentum risus, ac cursus libero ante at enim. In finibus tortor lorem, accumsan egestas turpis dapibus in. Praesent a erat vel ligula semper mattis."],
-        ["title" => "Test 2", "price" => 28, "image" => "meuble-occasion-prix-critere.jpg", "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc leo tortor, rhoncus malesuada volutpat at, ullamcorper vitae dui. Sed nec lacus mauris. Phasellus eget eleifend purus. Duis eros enim, pulvinar ut justo et, sagittis dignissim enim. Donec rhoncus, arcu at tempus accumsan, nisi risus condimentum risus, ac cursus libero ante at enim. In finibus tortor lorem, accumsan egestas turpis dapibus in. Praesent a erat vel ligula semper mattis."],
-        ["title" => "Test 3", "price" => 47, "image" => "meuble-occasion-prix-critere.jpg", "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc leo tortor, rhoncus malesuada volutpat at, ullamcorper vitae dui. Sed nec lacus mauris. Phasellus eget eleifend purus. Duis eros enim, pulvinar ut justo et, sagittis dignissim enim. Donec rhoncus, arcu at tempus accumsan, nisi risus condimentum risus, ac cursus libero ante at enim. In finibus tortor lorem, accumsan egestas turpis dapibus in. Praesent a erat vel ligula semper mattis."],
-      ];
+    $sql = "SELECT listings.id, listings.title, listings.description, listings.price, listings.image
+            FROM listings";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function getListingById(int $id): array
+function getListingById(PDO $pdo, int $id): array|bool
 { 
-    $listings = getListings();
-    return $listings[$id];
+  $sql = "SELECT listings.id, listings.title, listings.description, listings.price, listings.image
+          FROM listings
+          WHERE listings.id = :id";
+  $query = $pdo->prepare($sql);
+  $query->bindValue(":id", $id, PDO::PARAM_INT);
+  $query->execute();
+  return $query->fetch(PDO::FETCH_ASSOC);
 }

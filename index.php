@@ -6,7 +6,7 @@ require_once 'libs/category.php';
 
 
 
-$listings = getListings();
+$listings = getListings($pdo);
 $categories = getCategories();
 
 // $query = $pdo->prepare("SELECT * FROM categories WHERE id = :id");
