@@ -5,17 +5,6 @@ require_once 'libs/user.php';
 
 
 
-// if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["password"])) {
-//     $res = addUser($pdo, $_POST["username"], $_POST["email"], $_POST["password"]);
-//     var_dump($res);
-// }
-function var_dump_pre($variable) {
-    echo '<pre>';
-    var_dump($variable);
-    echo '</pre>';
-}
-
-
 // var_dump_pre($_POST);
 // var_dump_pre($_SERVER["REQUEST_METHOD"]);
 
@@ -24,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $verif = verifyUser($_POST);
     if ($verif === true) {
         $res = addUser($pdo, $_POST["username"], $_POST["email"], $_POST["password"]); 
+        header("Location: login.php");
     } else {
         $errors = $verif;
     }
