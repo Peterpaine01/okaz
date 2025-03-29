@@ -1,16 +1,16 @@
 <?php
 
-function getCategories(): array
+function getCategories(PDO $pdo): array
 {
-    return [
-        ["name" => "Jeux vidéos", "icon" => "controller"],
-        ["name" => "Meubles", "icon" => "lamp"],
-        ["name" => "Vêtements", "icon" => "tag"],
-      ];
+    $sql = "SELECT * FROM categories";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+
 }
 
-function getCategoryById(int $id): array
+function getCategoryById(PDO $pdo, int $id): array
 { 
-    $categories = getCategories();
+    $categories = getCategories($pdo);
     return  $categories[$id];
 }

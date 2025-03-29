@@ -7,7 +7,7 @@ require_once 'libs/category.php';
 
 
 $listings = getListings($pdo);
-$categories = getCategories();
+$categories = getCategories($pdo);
 
 // $query = $pdo->prepare("SELECT * FROM categories WHERE id = :id");
 // $query->bindValue(':id', 1, PDO::PARAM_INT);
@@ -17,11 +17,6 @@ $categories = getCategories();
   
 ?>
 
-
-
-
-
-  
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
       <div class="col-10 col-sm-8 col-lg-6">
         <img src="/assets/images/logo-okaz.png" class="d-block mx-lg-auto img-fluid" alt="Logo Okaz" width="700" loading="lazy">
