@@ -1,6 +1,6 @@
 <?php
 
-require_once 'libs/pdo.php';
+require_once __DIR__ . '/../libs/pdo.php';
 
 function getListings(PDO $pdo, array $filters = []): array
 {

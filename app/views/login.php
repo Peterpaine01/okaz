@@ -1,7 +1,7 @@
 <?php
-require_once 'templates/header.php';
-require_once 'libs/pdo.php';
-require_once 'libs/user.php';
+require_once __DIR__ . '/../templates/header.php';
+require_once __DIR__ . '/../libs/category.php';
+require_once __DIR__ . '/../libs/user.php';
 
 // session_start();
 
@@ -9,10 +9,15 @@ require_once 'libs/user.php';
 
 // $_SESSION["test"] = "abc";
 
+// Redirige si l'utilisateur est déjà connecté
+if (!empty($_SESSION["user"])) {
+  header("Location: index.php");
+  exit;
+}
+
 $error = NULL;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user = verifyUserLoginPassword($pdo, $_POST["email"], $_POST["password"]);
-    var_dump_pre($user);
     if($user){
       session_regenerate_id(true); // régénère nouvel id de session à chaque connexion, sécurité contre fixation de session (si vol de id de session), id volé devient inutilisable par le pirate à la nouvelle connexion
       $_SESSION["user"] = [
@@ -20,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         "username" => $user["username"],
         "email" => $user["email"],
       ];
-      header("Location: index.php");
+      header("Location: /");
     } else {
       $error = "Email ou mot de passe incorrect";
     }
@@ -56,5 +61,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
   <?php
-require_once 'templates/footer.php';
+require_once __DIR__ . '/../templates/footer.php';
 ?>

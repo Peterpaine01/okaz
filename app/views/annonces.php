@@ -1,10 +1,11 @@
 <?php
-require_once 'templates/header.php';
-require_once 'libs/pdo.php';
-require_once 'libs/listing.php';
-require_once 'libs/category.php';
+require_once __DIR__ . '/../templates/header.php';
+require_once __DIR__ . '/../libs/pdo.php';
+require_once __DIR__ . '/../libs/listing.php';
+require_once __DIR__ . '/../libs/category.php';
 
 $filters = [];
+
 if (isset($_GET["search"]) && $_GET["search"] !== "") {
     $filters["search"] = $_GET["search"];
 }
@@ -30,9 +31,9 @@ $categories = getCategories($pdo);
 
 <div class="row g-4 py-5">
     <div class="col-9">
-        <div class="row">
+        <div class="row" id="listingsContainer">
         <?php foreach ($listings as $listing) {
-        require'templates/listing_part.php';
+        require __DIR__ . '/../templates/listing_part.php';
         } ?>
 
         </div>
@@ -42,7 +43,7 @@ $categories = getCategories($pdo);
 
     </div>
     <div class="col-3">
-        <form action="" method="get">
+        <form id="filterForm" method="get">
             <h2>Filtres</h2>
             <div class="py-3 border-bottom">
                 <input type="text" name="search" id="search" class="form-control" placeholder="Rechercher" value="<?php if (isset($_GET["search"])) {
@@ -69,7 +70,7 @@ $categories = getCategories($pdo);
                 <select class="form-select form-select-lg mb-3" id="category" name="category" aria-label="Large select example">
                     <option disabled value>Toutes</option>
                     <?php foreach($categories as $category): ?>
-                        <option value="<?= $category["id"] ?>" <?php if ($category["id"] === (int)$_GET["categories"]) {echo 'selected="selected"';} ?> ><?= $category["name"] ?></option>
+                        <option value="<?= $category["id"] ?>" <?php if (isset($_GET["category"]) && $category["id"] === (int)$_GET["category"]) {echo 'selected="selected"';} ?> ><?= $category["name"] ?></option>
                     <?php endforeach; ?>
                     
                 </select>
@@ -90,6 +91,6 @@ $categories = getCategories($pdo);
 
 
 <?php
-require_once 'templates/footer.php';
+require_once __DIR__ . '/../templates/footer.php';
   
 ?>

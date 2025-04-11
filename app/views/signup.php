@@ -1,7 +1,7 @@
 <?php
-require_once 'templates/header.php';
-require_once 'libs/pdo.php';
-require_once 'libs/user.php';
+require_once __DIR__ . '/../templates/header.php';
+require_once __DIR__ . '/../libs/pdo.php';
+require_once __DIR__ . '/../libs/user.php';
 
 
 
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $verif = verifyUser($_POST);
     if ($verif === true) {
         $res = addUser($pdo, $_POST["username"], $_POST["email"], $_POST["password"]); 
-        header("Location: login.php");
+        header("Location: /login");
     } else {
         $errors = $verif;
     }
@@ -61,6 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 
-  <?php
-require_once 'templates/footer.php';
+<?php
+require_once __DIR__ . '/../templates/footer.php';
 ?>

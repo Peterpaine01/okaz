@@ -1,8 +1,8 @@
 <?php
-require_once 'templates/header.php';
-require_once 'libs/category.php';
+require_once __DIR__ . '/../templates/header.php';
+require_once __DIR__ . '/../libs/category.php';
 
-$categories = getCategories();
+// $categories = getCategories();
   
 ?>
 <h1 class="pb-2 border-bottom">Les catégories</h1>
@@ -18,6 +18,6 @@ $categories = getCategories();
 </div>
 
 <?php
-require_once 'templates/footer.php';
+require_once __DIR__ . '/../templates/footer.php';
   
 ?>

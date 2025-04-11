@@ -12,6 +12,7 @@ function addUser(PDO $pdo, string $username, string $email, string $password): b
     return $query->execute();
 }
 
+
 function verifyUser($user): array|bool
 {
     $errors = [];

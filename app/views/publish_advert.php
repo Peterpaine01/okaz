@@ -1,8 +1,15 @@
 <?php
-require_once 'templates/header.php';
-require_once 'libs/category.php';
+require_once __DIR__ . '/../templates/header.php';
+require_once __DIR__ . '/../libs/pdo.php';
+require_once __DIR__ . '/../libs/category.php';
 
-$categories = getCategories();
+
+// Redirige vers la page de connexion si l'utilisateur n'est pas connecté
+if (empty($_SESSION["user"])) {
+    header("Location: /login");
+    exit;
+}
+$categories = getCategories($pdo);
 ?>
 
 
@@ -27,7 +34,8 @@ $categories = getCategories();
             <label class="form-label" for="category">Catégorie</label>
             <select name="category" class="form-select" id="category" >
                 <?php foreach ($categories as $key => $category) { ?>
-                    <option value="<?=$key?>"><?=$category["name"]?></option>
+                    <option value="<?= $category["id"] ?>" <?php if (isset($_GET["category"]) && $category["id"] === (int)$_GET["category"]) {echo 'selected="selected"';} ?> ><?= $category["name"] ?></option>
+
                 <?php } ?>
             </select>
             
@@ -41,5 +49,5 @@ $categories = getCategories();
 
 
   <?php
-require_once 'templates/footer.php';
+require_once __DIR__ . '/../templates/footer.php';
 ?>
