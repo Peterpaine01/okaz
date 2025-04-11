@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../app/libs/init.php';
+require_once __DIR__ . '/../app/libs/pdo.php';
 
 // Inclure les fichiers nécessaires
 require_once __DIR__ . '/../core/Router.php';

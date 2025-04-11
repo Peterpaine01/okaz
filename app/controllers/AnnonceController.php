@@ -7,10 +7,16 @@ require_once __DIR__ . '/../libs/listing.php';
 
 class AnnonceController
 {
-    public function show($id)
+    public function show($params)
     {
-        global $pdo; // Connexion à la base de données
-        $listing = getListingById($pdo, (int) $id); // Récupère l'annonce
+        $id = $params['id'] ?? null;
+
+        if (!$id) {
+            header("Location: /404");
+            exit;
+        }
+        global $pdo; 
+        $listing = getListingById($pdo, (int) $id); 
 
         include realpath(__DIR__ . '/../views/annonce.php');
     }

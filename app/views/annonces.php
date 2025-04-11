@@ -1,6 +1,4 @@
 <?php
-
-
 $search = $_GET['search'] ?? null;
 $category = $_GET['category'] ?? null;
 $min_price = $_GET['min_price'] ?? null;
@@ -43,11 +41,7 @@ require_once __DIR__ . '/../templates/header.php';
         <?php foreach ($listings as $listing) {
         require __DIR__ . '/../templates/listing_part.php';
         } ?>
-
-        </div>
-        
-        
-
+    </div>
 
     </div>
     <div class="col-3">

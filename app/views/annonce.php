@@ -2,10 +2,16 @@
 require_once __DIR__ . '/../templates/header.php';
 require_once __DIR__ . '/../libs/pdo.php';
  
-  
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    echo '<div class="alert alert-success">Annonce publiée avec succès !</div>';
+}
+
 ?>
 
 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+<?php if (isset($_GET['success']) && $_GET['success'] === 1) {
+    echo '<div class="alert alert-success">Annonce publiée avec succès !</div>';
+}?>
 <?php if (isset($listing) && $listing ): ?>
     <div class="col-10 col-sm-8 col-lg-5">
         <img src="/uploads/listing/<?= $listing["image"] ?>" class="d-block mx-lg-auto img-fluid" alt="<?= $listing["title"] ?>" width="700" height="500" loading="lazy">

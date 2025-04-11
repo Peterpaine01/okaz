@@ -1,18 +1,11 @@
 <?php
 require_once __DIR__ . '/../templates/header.php';
-require_once __DIR__ . '/../libs/pdo.php';
 require_once __DIR__ . '/../libs/listing.php';
 require_once __DIR__ . '/../libs/category.php';
 
-
-
-$listings = getListings($pdo);
+$listings = getLatestListings($pdo);
 $categories = getCategories($pdo);
 
-// $query = $pdo->prepare("SELECT * FROM categories WHERE id = :id");
-// $query->bindValue(':id', 1, PDO::PARAM_INT);
-// $query->execute();
-// $result = $query->fetch(PDO::FETCH_ASSOC);
 // var_dump($categories[0]);
   
 ?>
@@ -30,26 +23,26 @@ $categories = getCategories($pdo);
 
   <div class="py-5">
     <h2 class="pb-2 border-bottom">Les dernières annonces</h2>
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="row g-4 py-5 pb-0 row-cols-1 row-cols-lg-3">
     <?php foreach ($listings as $key => $listing) {
       require __DIR__ . '/../templates/listing_part.php';
     } ?>
     </div>
-    
-
-
-    
+  </div>
+  <div class="d-flex border-top  justify-content-center py-1 pt-4">
+  <a href="/annonces" class="btn btn-primary ">Toutes les annonces <i class="bi bi-arrow-right"></i></a>
   </div>
 
   <div class="py-5" id="hanging-icons">
     <h2 class="pb-2 border-bottom">Les catégories</h2>
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3 ">
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
       <?php
       foreach ($categories as $key => $category) {
         require __DIR__ . '/../templates/category_part.php';
       } ?>
     </div>
   </div>
+  
 
   <?php
 require_once __DIR__ . '/../templates/footer.php';
