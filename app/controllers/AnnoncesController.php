@@ -7,15 +7,10 @@ require_once __DIR__ . '/../libs/pdo.php';
 
 class AnnoncesController
 {
-    public function index()
+    public function index($params)
     {
         global $pdo;
-        $filters = $_GET;
-        $listings = getListings($pdo, $filters);
-        header('Content-Type: application/json');
-        echo json_encode([
-            'listings' => $listings
-        ]);
+        //var_dump($params);
         include realpath(__DIR__ . '/../views/annonces.php');
     }
 }

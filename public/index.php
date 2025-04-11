@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../app/libs/init.php';
+
 // Inclure les fichiers nécessaires
 require_once __DIR__ . '/../core/Router.php';
 require_once __DIR__ . '/../app/controllers/HomeController.php';

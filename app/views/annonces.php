@@ -1,30 +1,38 @@
 <?php
-require_once __DIR__ . '/../templates/header.php';
+
+
+$search = $_GET['search'] ?? null;
+$category = $_GET['category'] ?? null;
+$min_price = $_GET['min_price'] ?? null;
+$max_price = $_GET['max_price'] ?? null;
+
+$filters = [];
+if ($search) $filters['search'] = $search;
+if ($min_price) $filters['min_price'] = $min_price;
+if ($max_price) $filters['max_price'] = $max_price;
+if ($category) $filters['category'] = $category;
+
 require_once __DIR__ . '/../libs/pdo.php';
 require_once __DIR__ . '/../libs/listing.php';
 require_once __DIR__ . '/../libs/category.php';
 
-$filters = [];
-
-if (isset($_GET["search"]) && $_GET["search"] !== "") {
-    $filters["search"] = $_GET["search"];
-}
-
-if (isset($_GET["min_price"]) && $_GET["min_price"] !== "") {
-    $filters["min_price"] = $_GET["min_price"];
-}
-
-if (isset($_GET["max_price"]) && $_GET["max_price"] !== "") {
-    $filters["max_price"] = $_GET["max_price"];
-}
-
-if (isset($_GET["category"]) && $_GET["category"] !== "") {
-    $filters["category"] = $_GET["category"];
-}
-
 
 $listings = getListings($pdo, $filters);
 $categories = getCategories($pdo);
+
+// Vérifie si la requête est AJAX
+if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+    header('Content-Type: application/json');
+    echo json_encode([
+        'debug' => 'Réponse AJAX détectée',
+        'params' => $_GET,
+        'listings' => $listings,
+    ]);
+    exit;
+}
+
+
+require_once __DIR__ . '/../templates/header.php';
 
 ?>
 <h1 class="pb-2 border-bottom">Les annonces</h1>
@@ -68,7 +76,7 @@ $categories = getCategories($pdo);
             <div class="py-3 border-bottom">
                 <label class="mb-2" for="category">Catégorie</label>
                 <select class="form-select form-select-lg mb-3" id="category" name="category" aria-label="Large select example">
-                    <option disabled value>Toutes</option>
+                    <option value="" <?php if (!isset($_GET["category"]) || $_GET["category"] === "") echo 'selected'; ?>>Toutes</option>
                     <?php foreach($categories as $category): ?>
                         <option value="<?= $category["id"] ?>" <?php if (isset($_GET["category"]) && $category["id"] === (int)$_GET["category"]) {echo 'selected="selected"';} ?> ><?= $category["name"] ?></option>
                     <?php endforeach; ?>
