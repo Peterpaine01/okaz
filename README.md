@@ -8,7 +8,7 @@
 
 # 📁 Okaz
 
-Un petit résumé ici : ce que fait le projet, à quoi il sert, à qui il est destiné.
+Site de petites annonces : consultation, filtre, ajout
 
 ---
 
@@ -41,12 +41,6 @@ define("DB_HOST", "localhost");
 define("DB_NAME", "nom_de_ta_db");
 define("DB_USER", "root");
 define("DB_PASSWORD", "");
-```
-
-3. **Lancer le serveur local PHP :**
-
-```bash
-php -S localhost:3000 -t public
 ```
 
 Le projet est maintenant accessible via http://localhost:3000

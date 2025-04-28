@@ -11,7 +11,7 @@ require_once __DIR__ . '/../libs/user.php';
 
 // Redirige si l'utilisateur est déjà connecté
 if (!empty($_SESSION["user"])) {
-  header("Location: index.php");
+  header("Location: /");
   exit;
 }
 
