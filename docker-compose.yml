@@ -48,7 +48,7 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - PMA_HOST=mysql
+      - PMA_HOST=c-mysql
     ports:
       - "8080:80"
     networks:

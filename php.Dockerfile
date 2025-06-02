@@ -1,4 +1,4 @@
-FROM php:8.3.11-fpm-alpine
+FROM php:8.3.20-fpm-alpine
 
 WORKDIR /var/www/html
 
@@ -12,3 +12,5 @@ EXPOSE 9000
 
 # On lance PHP-FPM
 CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
+
+

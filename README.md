@@ -17,7 +17,7 @@ Site de petites annonces : consultation, filtre, ajout
 - ✅ PHP (PDO)
 - ✅ HTML / CSS / JS
 - ✅ MySQL
-- ✅ Apache ou PHP server embarqué
+- ✅ PHP server
 
 ---
 
@@ -26,21 +26,21 @@ Site de petites annonces : consultation, filtre, ajout
 1. **Cloner le projet :**
 
 ```bash
-git clone https://github.com/ton-utilisateur/ton-projet.git
-cd ton-projet
+git clone https://github.com/Peterpaine01/okaz
+cd okaz
 ```
 
 2. **Configurer la base de données :**
 
 - Créer une base de données dans MySQL.
-- Importer le fichier database/schema.sql si fourni.
-- Configurer les identifiants dans config/database.php :
+- Configurer les identifiants de connexion dans un fichier .env à partir du .env.example :
 
-```php
-define("DB_HOST", "localhost");
-define("DB_NAME", "nom_de_ta_db");
-define("DB_USER", "root");
-define("DB_PASSWORD", "");
+```bash
+db_host=votre_serveur
+db_user=votre_user
+db_password=votre_password
+db_database=nom_bdd
+db_port=3306
 ```
 
 Le projet est maintenant accessible via http://localhost:3000
@@ -48,14 +48,20 @@ Le projet est maintenant accessible via http://localhost:3000
 ## 📁 Structure du projet
 
 ```plaintext
-├── config/             # Fichiers de configuration (BDD, constantes...)
-├── public/             # Point d'entrée (index.php, assets, routes publiques)
-├── src/                # Contrôleurs, modèles, vues
+├── app/                # Contrôleurs, modèles, vues
 │   ├── controllers/
-│   ├── models/
+│   ├── libs/
+│   ├── templates/
 │   └── views/
+├── config/             # Fichiers de configuration (BDD, constantes...)
+├── core/               # Router
+├── public/             # Point d'entrée (index.php, assets, routes publiques)
 ├── database/           # Scripts SQL
-├── .env                # Fichier d'environnement (si utilisé)
+├── .env                # Fichier d'environnement
+├── .env.example        # Fichier d'environnement en exemple
+├── docker-compose.yml
+├── nginx.Dockerfile
+├── php.Dockerfile
 └── README.md           # Ce fichier :)
 ```
 
@@ -63,16 +69,15 @@ Le projet est maintenant accessible via http://localhost:3000
 
 - Connexion / inscription
 - Gestion des utilisateurs
-- CRUD sur [entité principale]
+- CRUD sur listings
 - Authentification avec sessions
-- Sécurité basique (hashage, validation...)
+- Sécurité basique (hashage)
 
 ## 📌 À faire / améliorations possibles
 
 - Ajout d’un système de rôles (admin / user)
-- Refactorisation du routeur
 - Tests automatisés
-- Documentation de l'API interne
+- CRUD Category
 
 ## 🙌 Contribuer
 
